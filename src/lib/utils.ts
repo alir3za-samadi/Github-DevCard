@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-import type { GithubRepo, Repos, SortOptionValue } from "@/lib/types";
+import type { GithubRepo, GithubRepos, SortOptionValue } from "@/lib/types";
 
 export type { ClassValue };
 
@@ -47,7 +47,7 @@ export function languageCount(repos: GithubRepo[]) {
   return topLanguages;
 }
 
-export function sortRepos(repos: Repos, sortBy: SortOptionValue) {
+export function sortRepos(repos: GithubRepos, sortBy: SortOptionValue) {
   const newRepos = [...repos];
 
   switch (sortBy) {

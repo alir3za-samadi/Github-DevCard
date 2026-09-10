@@ -103,5 +103,5 @@ export interface Language {
   color: string;
 }
 
-export type Languages = Language[];
+export type Languages = readonly Language[];
 export type LanguageValue = (typeof TOP_LANGUAGES)[number]["value"];
