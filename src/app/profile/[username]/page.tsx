@@ -1,4 +1,4 @@
-import RepoSection from "@/components/ui/profile/repo-section";
+import RepoSection from "@/components/ui/profile/repos-section";
 import ProfileSection from "@/components/ui/profile/profile-section";
 import { Separator } from "@/components/ui/separator";
 import { notFound } from "next/navigation";
