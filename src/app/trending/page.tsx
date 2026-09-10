@@ -1,6 +1,7 @@
 import PageHeader from "@/components/ui/page-header";
-import SortSection from "@/components/ui/trending/filter-section";
+import FilterSection from "@/components/ui/trending/filter-section";
 import ReposSection from "@/components/ui/trending/repos-section";
+import GenerateCard from "@/components/ui/generate-card";
 import { TOP_LANGUAGES } from "@/lib/constants";
 import { redirect } from "next/navigation";
 
@@ -29,8 +30,22 @@ export default async function TrendingPage({
       <PageHeader
         title={`Trending ${currentLang.label} Repositories on GitHub`}
       />
-
-      <SortSection languages={TOP_LANGUAGES} currentLang={currentLang} />
+      <div className="flex justify-between">
+        <FilterSection languages={TOP_LANGUAGES} currentLang={currentLang} />
+        <GenerateCard triggerClassame="text-sm">
+          <PageHeader
+            title={`Trending ${currentLang.label} Repositories on GitHub`}
+          />
+          <ReposSection
+            repos={
+              currentTrendingRepos
+                ? currentTrendingRepos.items.slice(0, 5)
+                : null
+            }
+            currentLang={currentLang}
+          />
+        </GenerateCard>
+      </div>
 
       <ReposSection
         repos={currentTrendingRepos ? currentTrendingRepos.items : null}

@@ -26,7 +26,7 @@ export default function SortSection({
 
   return (
     <>
-      <div className="hidden md:flex items-center gap-2">
+      <div className="hidden w-2/3 md:flex md:flex-wrap items-center gap-2">
         {languages.map((lang) => {
           const isActive = lang.value === currentLang.value;
           return (
@@ -53,7 +53,7 @@ export default function SortSection({
             router.push(`/trending?lang=${val}`, { scroll: false });
           }}
         >
-          <SelectTrigger className="w-full max-w-40 text-xs md:text-sm">
+          <SelectTrigger className="w-full max-w-40 text-sm">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
