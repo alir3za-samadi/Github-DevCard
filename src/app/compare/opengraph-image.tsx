@@ -36,75 +36,98 @@ export default async function Image({
         backgroundColor: OG_THEME.bg,
         color: OG_THEME.foreground,
         fontFamily: "sans-serif",
-        padding: "40px",
+        padding: "32px",
       }}
     >
       <div
         style={{
+          width: "100%",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-between",
           backgroundColor: OG_THEME.cardBg,
-          border: `1px solid ${OG_THEME.border}`,
-          borderRadius: "16px",
-          padding: "48px 64px",
+          border: `2px solid ${OG_THEME.border}`,
+          borderRadius: "24px",
+          padding: "60px 40px",
         }}
       >
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            fontSize: 28,
+            fontSize: 32,
             fontWeight: "bold",
             color: OG_THEME.primary,
-            marginBottom: 20,
+            letterSpacing: "-0.02em",
           }}
         >
           DevCard
         </div>
 
-        {hasUsers ? (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          {hasUsers ? (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "24px",
+                fontSize: 60,
+                fontWeight: 800,
+                letterSpacing: "-0.03em",
+                color: OG_THEME.foreground,
+              }}
+            >
+              <span>{userA}</span>
+              <span style={{ color: OG_THEME.vsAccent, fontSize: 44 }}>VS</span>
+              <span>{userB}</span>
+            </div>
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                fontSize: 64,
+                fontWeight: 800,
+                letterSpacing: "-0.03em",
+                color: OG_THEME.foreground,
+                textAlign: "center",
+              }}
+            >
+              Compare GitHub Profiles
+            </div>
+          )}
+
           <div
             style={{
               display: "flex",
-              alignItems: "center",
-              gap: "16px",
-              fontSize: 48,
-              fontWeight: 800,
-              letterSpacing: "-0.025em",
-              color: OG_THEME.foreground,
+              fontSize: 24,
+              color: OG_THEME.muted,
+              marginTop: 8,
             }}
           >
-            <span>{userA}</span>
-            <span style={{ color: OG_THEME.vsAccent, fontSize: 36 }}>VS</span>
-            <span>{userB}</span>
+            {hasUsers
+              ? "Head-to-head GitHub developer profile match"
+              : "Compare developer statistics side-by-side with DevCard"}
           </div>
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              fontSize: 48,
-              fontWeight: 800,
-              letterSpacing: "-0.025em",
-              color: OG_THEME.foreground,
-            }}
-          >
-            Compare GitHub Profiles
-          </div>
-        )}
+        </div>
 
         <div
           style={{
             display: "flex",
-            fontSize: 20,
+            fontSize: 18,
             color: OG_THEME.muted,
-            marginTop: 16,
+            opacity: 0.8,
           }}
         >
-          {hasUsers
-            ? "Head-to-head GitHub developer profile match"
-            : "Compare developer statistics side-by-side with DevCard"}
+          devcard.app
         </div>
       </div>
     </div>,

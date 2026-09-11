@@ -33,29 +33,31 @@ export default async function Image({
         backgroundColor: OG_THEME.bg,
         color: OG_THEME.foreground,
         fontFamily: "sans-serif",
-        padding: "40px",
+        padding: "32px",
       }}
     >
       <div
         style={{
+          width: "100%",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "space-between",
           backgroundColor: OG_THEME.cardBg,
-          border: `1px solid ${OG_THEME.border}`,
-          borderRadius: "16px",
-          padding: "48px 64px",
+          border: `2px solid ${OG_THEME.border}`,
+          borderRadius: "24px",
+          padding: "60px 40px",
         }}
       >
         <div
           style={{
             display: "flex",
             alignItems: "center",
-            fontSize: 28,
+            fontSize: 32,
             fontWeight: "bold",
             color: OG_THEME.primary,
-            marginBottom: 16,
+            letterSpacing: "-0.02em",
           }}
         >
           DevCard
@@ -64,24 +66,43 @@ export default async function Image({
         <div
           style={{
             display: "flex",
-            fontSize: 52,
-            fontWeight: 800,
-            letterSpacing: "-0.025em",
-            color: OG_THEME.foreground,
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "8px",
           }}
         >
-          {username}
+          <div
+            style={{
+              display: "flex",
+              fontSize: 72,
+              fontWeight: 800,
+              letterSpacing: "-0.03em",
+              color: OG_THEME.foreground,
+            }}
+          >
+            {username}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              fontSize: 26,
+              color: OG_THEME.muted,
+              marginTop: 8,
+            }}
+          >
+            GitHub Developer Profile Overview
+          </div>
         </div>
 
         <div
           style={{
             display: "flex",
-            fontSize: 20,
+            fontSize: 18,
             color: OG_THEME.muted,
-            marginTop: 12,
+            opacity: 0.8,
           }}
         >
-          GitHub Developer Profile Overview
+          devcard.app
         </div>
       </div>
     </div>,
