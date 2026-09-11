@@ -5,7 +5,7 @@ import GenerateCard from "@/components/ui/generate-card";
 import { Separator } from "@/components/ui/separator";
 import { Swords } from "lucide-react";
 
-import { UserData } from "@/lib/types";
+import { UserProfileData } from "@/lib/types";
 import PageHeader from "@/components/ui/page-header";
 
 export default async function ComparePage({
@@ -15,8 +15,8 @@ export default async function ComparePage({
 }) {
   const { userA = "", userB = "" } = await searchParams;
 
-  let dataA: UserData | null = null;
-  let dataB: UserData | null = null;
+  let dataA: UserProfileData | null = null;
+  let dataB: UserProfileData | null = null;
 
   if (userA && userB) {
     [dataA, dataB] = await Promise.all([getUser(userA), getUser(userB)]);
@@ -42,13 +42,13 @@ export default async function ComparePage({
           <div className="flex justify-center">
             <GenerateCard triggerClassame="w-full text-sm">
               <div className="flex flex-col gap-4 md:flex-row">
-                <UserInfo userData={dataA} />
+                <UserInfo userProfileData={dataA} />
                 <Swords
                   className="text-muted-foreground shrink-0 mx-auto md:my-auto"
                   size={18}
                   aria-hidden="true"
                 />
-                <UserInfo userData={dataB} />
+                <UserInfo userProfileData={dataB} />
               </div>
 
               <HeadToHead dataA={dataA} dataB={dataB} />
@@ -56,13 +56,13 @@ export default async function ComparePage({
           </div>
 
           <div className="flex flex-col gap-4 md:flex-row">
-            <UserInfo userData={dataA} />
+            <UserInfo userProfileData={dataA} />
             <Swords
               className="text-muted-foreground shrink-0 mx-auto md:my-auto"
               size={18}
               aria-hidden="true"
             />
-            <UserInfo userData={dataB} />
+            <UserInfo userProfileData={dataB} />
           </div>
 
           <HeadToHead dataA={dataA} dataB={dataB} />
@@ -72,7 +72,7 @@ export default async function ComparePage({
   );
 }
 
-async function getUser(username: string): Promise<UserData | null> {
+async function getUser(username: string): Promise<UserProfileData | null> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   try {

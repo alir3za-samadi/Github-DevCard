@@ -1,12 +1,12 @@
 import { fetchGithubUser, fetchGithubRepos } from "@/lib/github";
 import { collctedStars } from "@/lib/utils";
 import { NextResponse } from "next/server";
-import type { GithubUserDataResponse } from "@/lib/types";
+import type { GithubUserProfileResponse } from "@/lib/types";
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ username: string }> },
-): Promise<NextResponse<GithubUserDataResponse>> {
+): Promise<NextResponse<GithubUserProfileResponse>> {
   const username = (await params).username;
 
   if (!username) {

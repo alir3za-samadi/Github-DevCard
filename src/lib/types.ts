@@ -1,6 +1,6 @@
 import { SORT_OPTIONS, TOP_LANGUAGES } from "@/lib/constants";
 
-export interface UserData {
+export interface UserProfileData {
   username: string;
   followers: number;
   public_repos: number;
@@ -89,7 +89,7 @@ export type GithubRepos = GithubRepo[];
 export type GithubUserResponse = GithubUser | { message: string };
 export type GithubReposResponse = GithubRepo[] | { message: string };
 export type GithubStarredResponse = GithubRepo[] | { message: string };
-export type GithubUserDataResponse = UserData | { message: string };
+export type GithubUserProfileResponse = UserProfileData | { message: string };
 
 export type GithubTrendingReposResponse =
   | GithubTrendingRepos

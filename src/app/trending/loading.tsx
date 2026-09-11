@@ -1,4 +1,3 @@
-// src/app/trending/loading.tsx
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
