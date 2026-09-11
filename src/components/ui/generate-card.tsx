@@ -65,7 +65,7 @@ export default function GenerateCard({
 
   const handleShare = (platform: "telegram" | "twitter" | "linkedin") => {
     const currentUrl = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent("Check out this GitHub stats on DevCard!");
+    const text = encodeURIComponent("Check out this Github stats on DevCard!");
 
     const shareUrls = {
       telegram: `https://t.me/share/url?url=${currentUrl}&text=${text}`,
