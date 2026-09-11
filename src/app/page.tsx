@@ -3,9 +3,9 @@ import HeroSection from "@/components/ui/home/hero-section";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Search GitHub Profiles | DevCard",
+  title: "Search Github Profiles | DevCard",
   description:
-    "Search and explore GitHub user profiles, repositories, top languages, and developer statistics on DevCard.",
+    "Search and explore Github user profiles, repositories, top languages, and developer statistics on DevCard.",
 };
 
 export default function Home() {

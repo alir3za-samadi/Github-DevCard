@@ -11,7 +11,7 @@ export default function HeroSection() {
       <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-balance leading-tight sm:leading-none">
         Discover & Export <br />
         <span className="bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-          GitHub Developer Profiles
+          Github Developer Profiles
         </span>
       </h1>
 

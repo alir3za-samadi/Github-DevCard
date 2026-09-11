@@ -1,6 +1,6 @@
-# GitHub DevCard
+# Github DevCard
 
-> Search any GitHub username, inspect their stats and top repos, and export a shareable "dev card" as a PNG.
+> Search any Github username, inspect their stats and top repos, and export a shareable "dev card" as a PNG.
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
@@ -18,11 +18,11 @@ _Search a username → view the generated profile page → export it as a downlo
 
 ## Features
 
-- 🔍 **Search any GitHub username** and jump straight to a full profile view
+- 🔍 **Search any Github username** and jump straight to a full profile view
 - 📊 **Profile stats** — followers, public repo count, total stars collected across all repos, top languages breakdown
 - ⭐ **Highlighted repo** — automatically surfaces the user's most-starred (or most recently updated) repository
 - 🖼️ **Exportable dev card** — renders the profile as a styled card and downloads it as a PNG, client-side, with no server round-trip
-- ⚖️ **Compare mode** — put two GitHub users head-to-head
+- ⚖️ **Compare mode** — put two Github users head-to-head
 - 📈 **Trending repos** — browse trending repositories filtered by language and time window
 - 🔎 **Dynamic SEO on every page** — `/profile/[username]`, `/compare`, and `/trending` each build their own `<title>`/description at request time via `generateMetadata`, so titles, search results, and link previews always reflect what's actually being viewed
 - 🖼️ **Personalized social preview cards** — each of those three pages ships its own `next/og`-generated Open Graph image (the username, the two usernames being compared, or the selected language, rendered into a branded card), so sharing a link on Twitter/X, LinkedIn, or Discord shows a real preview instead of a generic screenshot
@@ -37,7 +37,7 @@ _Search a username → view the generated profile page → export it as a downlo
 | Styling / UI | Tailwind CSS v4, shadcn/ui, Base UI |
 | Forms & validation | react-hook-form + zod |
 | Card export | [html-to-image](https://github.com/bubkoo/html-to-image) (`toBlob` → PNG download) |
-| Data source | [GitHub REST API](https://docs.github.com/en/rest) |
+| Data source | [Github REST API](https://docs.github.com/en/rest) |
 | Deployment | Vercel |
 
 ## Why this architecture
@@ -46,17 +46,17 @@ A few deliberate decisions worth calling out, since they're easy to miss just sk
 
 ### A dedicated API route (`/api/github/...`), separate from the pages
 
-`GET /api/github/profile/[username]` and `GET /api/github/trending` are standalone JSON endpoints, and the `/compare` and `/trending` pages call them over HTTP (via `NEXT_PUBLIC_BASE_URL`) instead of importing the GitHub-fetching functions directly. Keeping the GitHub-fetching logic behind an API route means:
+`GET /api/github/profile/[username]` and `GET /api/github/trending` are standalone JSON endpoints, and the `/compare` and `/trending` pages call them over HTTP (via `NEXT_PUBLIC_BASE_URL`) instead of importing the Github-fetching functions directly. Keeping the Github-fetching logic behind an API route means:
 
-- **Rate-limit handling lives in one place.** GitHub's REST API allows only 60 unauthenticated requests/hour per IP (5,000/hour with a token). The route normalizes GitHub's various failure states (404, 429, 422, network errors) into a single, predictable JSON error shape instead of leaking raw GitHub errors to every consumer.
+- **Rate-limit handling lives in one place.** Github's REST API allows only 60 unauthenticated requests/hour per IP (5,000/hour with a token). The route normalizes Github's various failure states (404, 429, 422, network errors) into a single, predictable JSON error shape instead of leaking raw Github errors to every consumer.
 - **The response is a stable, reusable contract.** Any page, client component, or future public integration that needs "stats for user X" hits the same endpoint instead of duplicating fetch logic.
 
 ### Caching via Next.js's fetch cache (ISR-style revalidation)
 
-Every GitHub call goes through `fetch(url, { next: { revalidate: 3600 } })`. Because GitHub's rate limit is tight and per-IP, re-fetching the same profile on every request would burn through it fast. Time-based revalidation means:
+Every Github call goes through `fetch(url, { next: { revalidate: 3600 } })`. Because Github's rate limit is tight and per-IP, re-fetching the same profile on every request would burn through it fast. Time-based revalidation means:
 
-- The first request for a given username hits GitHub and caches the result.
-- Any request within the next hour reuses the cached data — no GitHub call, no rate-limit cost.
+- The first request for a given username hits Github and caches the result.
+- Any request within the next hour reuses the cached data — no Github call, no rate-limit cost.
 - After an hour, the data is treated as stale and refreshed automatically on the next request.
 
 This gives most of the benefit of static generation (fast, cached responses) while still keeping profile data reasonably fresh — a good fit for data that changes slowly (follower counts, repo lists) but shouldn't be frozen forever like a fully static page.
@@ -99,7 +99,7 @@ Then open [http://localhost:3000](http://localhost:3000).
 | Variable | Required | Description |
 |---|---|---|
 | `NEXT_PUBLIC_BASE_URL` | **Yes** | The base URL the app is running on (e.g. `http://localhost:3000` locally, or your deployed domain in production). The `/compare` and `/trending` pages call the app's own `/api/github/...` routes over HTTP, so this needs to point at wherever the app itself is reachable. |
-| `GITHUB_TOKEN` | No | A [GitHub personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use GitHub's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
+| `GITHUB_TOKEN` | No | A [Github personal access token](https://github.com/settings/tokens) (no scopes needed for public data). Without it, requests use Github's unauthenticated rate limit (60/hour/IP). With it, the limit jumps to 5,000/hour, which is worth setting for local development if you're searching a lot of usernames back-to-back. |
 
 Create a `.env.local` file in the project root:
 
