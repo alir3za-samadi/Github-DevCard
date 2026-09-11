@@ -1,7 +1,8 @@
 import { ImageResponse } from "next/og";
+import { TOP_LANGUAGES } from "@/lib/constants";
 
 export const runtime = "edge";
-export const alt = "GitHub Profile Preview | DevCard";
+export const alt = "Trending GitHub Repositories | DevCard";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -15,11 +16,14 @@ const OG_THEME = {
 };
 
 export default async function Image({
-  params,
+  searchParams,
 }: {
-  params: Promise<{ username: string }>;
+  searchParams: Promise<{ lang?: string }>;
 }) {
-  const { username } = await params;
+  const { lang } = await searchParams;
+
+  const currentLang =
+    TOP_LANGUAGES.find((l) => l.value === lang) || TOP_LANGUAGES[0];
 
   return new ImageResponse(
     <div
@@ -64,13 +68,14 @@ export default async function Image({
         <div
           style={{
             display: "flex",
-            fontSize: 52,
+            fontSize: 48,
             fontWeight: 800,
             letterSpacing: "-0.025em",
             color: OG_THEME.foreground,
+            textAlign: "center",
           }}
         >
-          {username}
+          Trending {currentLang.label} Repos
         </div>
 
         <div
@@ -78,10 +83,10 @@ export default async function Image({
             display: "flex",
             fontSize: 20,
             color: OG_THEME.muted,
-            marginTop: 12,
+            marginTop: 16,
           }}
         >
-          GitHub Developer Profile Overview
+          Explore top trending projects on GitHub today
         </div>
       </div>
     </div>,

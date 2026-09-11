@@ -3,7 +3,6 @@ import FilterSection from "@/components/ui/trending/filter-section";
 import ReposSection from "@/components/ui/trending/repos-section";
 import GenerateCard from "@/components/ui/generate-card";
 import { TOP_LANGUAGES } from "@/lib/constants";
-import { redirect } from "next/navigation";
 import type { GithubTrendingRepos, LanguageValue } from "@/lib/types";
 import type { Metadata } from "next";
 
@@ -35,10 +34,10 @@ export default async function TrendingPage({
 }) {
   const { lang } = await searchParams;
 
-  if (!lang) redirect("/trending?lang=javascript");
+  const targetLangValue = lang || "javascript";
 
   const currentLang =
-    TOP_LANGUAGES.find((l) => l.value === lang) || TOP_LANGUAGES[0];
+    TOP_LANGUAGES.find((l) => l.value === targetLangValue) || TOP_LANGUAGES[0];
   const currentTrendingRepos = await getTerndingRepos(currentLang.value, 30);
 
   if (currentTrendingRepos && "message" in currentTrendingRepos) {

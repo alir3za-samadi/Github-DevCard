@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "GitHub Profile Preview | DevCard";
+export const alt = "Compare GitHub Profiles | DevCard";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -12,14 +12,17 @@ const OG_THEME = {
   primary: "#38bdf8",
   foreground: "#f8fafc",
   muted: "#94a3b8",
+  vsAccent: "#f43f5e",
 };
 
 export default async function Image({
-  params,
+  searchParams,
 }: {
-  params: Promise<{ username: string }>;
+  searchParams: Promise<{ userA?: string; userB?: string }>;
 }) {
-  const { username } = await params;
+  const { userA = "", userB = "" } = await searchParams;
+
+  const hasUsers = Boolean(userA && userB);
 
   return new ImageResponse(
     <div
@@ -55,33 +58,53 @@ export default async function Image({
             fontSize: 28,
             fontWeight: "bold",
             color: OG_THEME.primary,
-            marginBottom: 16,
+            marginBottom: 20,
           }}
         >
           DevCard
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            fontSize: 52,
-            fontWeight: 800,
-            letterSpacing: "-0.025em",
-            color: OG_THEME.foreground,
-          }}
-        >
-          {username}
-        </div>
+        {hasUsers ? (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "16px",
+              fontSize: 48,
+              fontWeight: 800,
+              letterSpacing: "-0.025em",
+              color: OG_THEME.foreground,
+            }}
+          >
+            <span>{userA}</span>
+            <span style={{ color: OG_THEME.vsAccent, fontSize: 36 }}>VS</span>
+            <span>{userB}</span>
+          </div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              fontSize: 48,
+              fontWeight: 800,
+              letterSpacing: "-0.025em",
+              color: OG_THEME.foreground,
+            }}
+          >
+            Compare GitHub Profiles
+          </div>
+        )}
 
         <div
           style={{
             display: "flex",
             fontSize: 20,
             color: OG_THEME.muted,
-            marginTop: 12,
+            marginTop: 16,
           }}
         >
-          GitHub Developer Profile Overview
+          {hasUsers
+            ? "Head-to-head GitHub developer profile match"
+            : "Compare developer statistics side-by-side with DevCard"}
         </div>
       </div>
     </div>,
