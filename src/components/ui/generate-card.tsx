@@ -15,12 +15,11 @@ import { toBlob } from "html-to-image";
 
 export default function GenerateCard({
   cardName,
-  triggerClassame,
-
+  triggerClassName,
   children,
 }: {
   cardName?: string | null;
-  triggerClassame?: string;
+  triggerClassName?: string;
   children: ReactNode;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -59,7 +58,7 @@ export default function GenerateCard({
     <Dialog>
       <DialogTrigger
         render={
-          <Button className={`text-xs md:text-sm md:w-30 ${triggerClassame}`}>
+          <Button className={`text-xs md:text-sm md:w-30 ${triggerClassName}`}>
             Generate card
           </Button>
         }

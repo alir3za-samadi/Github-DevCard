@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "DevCard | Github Profile Viewer",
-  description: "DevCard | Github Profile Viewer by Alir3za Samadi",
+  description: "DevCard | Github Profile Viewer Made by Alir3za Samadi",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

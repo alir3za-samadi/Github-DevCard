@@ -5,13 +5,33 @@ import HeadToHead from "@/components/ui/compare/head-to-head";
 import GenerateCard from "@/components/ui/generate-card";
 import { Separator } from "@/components/ui/separator";
 import { Swords } from "lucide-react";
-import { UserProfileData } from "@/lib/types";
+import type { UserProfileData } from "@/lib/types";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "DevCard | Github Profile Viewer",
-  description: "DevCard | Github Profile Viewer by Alir3za Samadi",
-};
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ userA?: string; userB?: string }>;
+}): Promise<Metadata> {
+  const { userA = "", userB = "" } = await searchParams;
+
+  const hasUsers = Boolean(userA && userB);
+
+  const title = hasUsers
+    ? `Compare ${userA} vs ${userB} | DevCard`
+    : "Compare GitHub Profiles | DevCard";
+
+  const description = hasUsers
+    ? `Head-to-head GitHub profile comparison between ${userA} and ${userB}.`
+    : "Compare two GitHub developer profiles side-by-side with DevCard.";
+
+  return {
+    title,
+    description,
+    openGraph: { title, description, type: "website" },
+    twitter: { card: "summary_large_image", title, description },
+  };
+}
 
 export default async function ComparePage({
   searchParams,
@@ -27,11 +47,14 @@ export default async function ComparePage({
     [dataA, dataB] = await Promise.all([getUser(userA), getUser(userB)]);
   }
 
+  const pageTitle =
+    dataA && dataB
+      ? `Compare ${dataA.login} vs ${dataB.login}`
+      : "Compare GitHub Profiles";
+
   return (
     <div className="w-full mx-auto p-6 space-y-6 lg:w-3/4">
-      <PageHeader
-        title={`Compare ${dataA ? dataA.login + " vs" : ""} ${dataB ? dataB.login : ""}`}
-      />
+      <PageHeader title={pageTitle} />
 
       <CompareForm
         userA={userA}
@@ -45,7 +68,7 @@ export default async function ComparePage({
           <Separator />
 
           <div className="flex justify-center">
-            <GenerateCard triggerClassame="w-full text-sm">
+            <GenerateCard triggerClassName="w-full text-sm">
               <div className="flex flex-col gap-4 md:flex-row">
                 <UserInfo userProfileData={dataA} />
                 <Swords
@@ -89,10 +112,9 @@ async function getUser(username: string): Promise<UserProfileData | null> {
       if (res.status === 404) return null;
 
       const errorData = await res.json().catch(() => null);
-      const errorMessage = errorData?.message || "FAILED_TO_FETCH";
-
-      throw new Error(errorMessage);
+      throw new Error(errorData?.message || "FAILED_TO_FETCH");
     }
+
     return await res.json();
   } catch (error) {
     throw error;

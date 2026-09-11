@@ -7,10 +7,26 @@ import { redirect } from "next/navigation";
 import type { GithubTrendingRepos, LanguageValue } from "@/lib/types";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "DevCard | Github Profile Viewer",
-  description: "DevCard | Github Profile Viewer by Alir3za Samadi",
-};
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: Promise<{ lang?: string }>;
+}): Promise<Metadata> {
+  const { lang } = await searchParams;
+
+  const currentLang =
+    TOP_LANGUAGES.find((l) => l.value === lang) || TOP_LANGUAGES[0];
+
+  const title = `Trending ${currentLang.label} GitHub Repositories | DevCard`;
+  const description = `Explore top trending ${currentLang.label} repositories on GitHub today. Filter by programming language and discover popular projects with DevCard.`;
+
+  return {
+    title,
+    description,
+    openGraph: { title, description, type: "website" },
+    twitter: { card: "summary_large_image", title, description },
+  };
+}
 
 export default async function TrendingPage({
   searchParams,
@@ -37,7 +53,7 @@ export default async function TrendingPage({
       />
       <div className="flex justify-between">
         <FilterSection languages={TOP_LANGUAGES} currentLang={currentLang} />
-        <GenerateCard triggerClassame="text-sm">
+        <GenerateCard triggerClassName="text-sm">
           <PageHeader
             title={`Trending ${currentLang.label} Repositories on GitHub`}
           />
