@@ -19,8 +19,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const username = (await params).username;
 
-  const title = `${username}'s GitHub Profile | DevCard`;
-  const description = `View ${username}'s GitHub repositories, stars, and developer stats on DevCard.`;
+  const title = `${username}'s Github Profile | DevCard`;
+  const description = `View ${username}'s Github repositories, stars, and developer stats on DevCard.`;
 
   return {
     title,

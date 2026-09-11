@@ -19,11 +19,11 @@ export async function generateMetadata({
 
   const title = hasUsers
     ? `Compare ${userA} vs ${userB} | DevCard`
-    : "Compare GitHub Profiles | DevCard";
+    : "Compare Github Profiles | DevCard";
 
   const description = hasUsers
-    ? `Head-to-head GitHub profile comparison between ${userA} and ${userB}.`
-    : "Compare two GitHub developer profiles side-by-side with DevCard.";
+    ? `Head-to-head Github profile comparison between ${userA} and ${userB}.`
+    : "Compare two Github developer profiles side-by-side with DevCard.";
 
   return {
     title,

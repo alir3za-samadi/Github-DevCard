@@ -16,7 +16,7 @@ export async function generateMetadata({
   const currentLang =
     TOP_LANGUAGES.find((l) => l.value === lang) || TOP_LANGUAGES[0];
 
-  const title = `Trending ${currentLang.label} GitHub Repositories | DevCard`;
+  const title = `Trending ${currentLang.label} Github Repositories | DevCard`;
   const description = `Explore top trending ${currentLang.label} repositories on GitHub today. Filter by programming language and discover popular projects with DevCard.`;
 
   return {

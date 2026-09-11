@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Compare GitHub Profiles | DevCard";
+export const alt = "Compare Github Profiles | DevCard";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

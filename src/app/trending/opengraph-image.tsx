@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { TOP_LANGUAGES } from "@/lib/constants";
 
 export const runtime = "edge";
-export const alt = "Trending GitHub Repositories | DevCard";
+export const alt = "Trending Github Repositories | DevCard";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
