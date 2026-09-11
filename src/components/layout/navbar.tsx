@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Code2, GitCompare, TrendingUp, Menu } from "lucide-react";
 import {

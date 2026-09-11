@@ -1,22 +1,21 @@
 import { cn } from "@/lib/utils";
-
-import { UserData } from "@/lib/types";
+import { UserProfileData } from "@/lib/types";
 
 const STATS_CONFIG = [
   {
     key: "followers",
     label: "Followers",
-    getValue: (data: UserData) => data.followers,
+    getValue: (data: UserProfileData) => data.followers,
   },
   {
     key: "repos",
     label: "Repositories",
-    getValue: (data: UserData) => data.public_repos,
+    getValue: (data: UserProfileData) => data.public_repos,
   },
   {
     key: "total_stars",
     label: "Total Stars",
-    getValue: (data: UserData) => data.totalStars,
+    getValue: (data: UserProfileData) => data.totalStars,
   },
 ] as const;
 
@@ -29,8 +28,8 @@ export default function HeadToHead({
   dataA,
   dataB,
 }: {
-  dataA: UserData;
-  dataB: UserData;
+  dataA: UserProfileData;
+  dataB: UserProfileData;
 }) {
   return (
     <div className="p-6 border rounded-xl bg-card space-y-6">

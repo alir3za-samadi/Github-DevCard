@@ -1,12 +1,17 @@
+import PageHeader from "@/components/ui/page-header";
 import CompareForm from "@/components/ui/compare/compare-form";
 import UserInfo from "@/components/ui/compare/user-info";
 import HeadToHead from "@/components/ui/compare/head-to-head";
 import GenerateCard from "@/components/ui/generate-card";
 import { Separator } from "@/components/ui/separator";
 import { Swords } from "lucide-react";
-
 import { UserProfileData } from "@/lib/types";
-import PageHeader from "@/components/ui/page-header";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DevCard | Github Profile Viewer",
+  description: "DevCard | Github Profile Viewer by Alir3za Samadi",
+};
 
 export default async function ComparePage({
   searchParams,

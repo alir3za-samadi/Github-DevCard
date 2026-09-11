@@ -1,3 +1,4 @@
+import PageHeader from "@/components/ui/page-header";
 import RepoSection from "@/components/ui/profile/repos-section";
 import ProfileSection from "@/components/ui/profile/profile-section";
 import { Separator } from "@/components/ui/separator";
@@ -8,9 +9,13 @@ import {
   fetchGithubUserGivenStarred,
   fetchGithubUserMostStarredRepo,
 } from "@/lib/github";
-
 import type { GithubRepo } from "@/lib/types";
-import PageHeader from "@/components/ui/page-header";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DevCard | Github Profile Viewer",
+  description: "DevCard | Github Profile Viewer by Alir3za Samadi",
+};
 
 export default async function UserProfile({
   params,

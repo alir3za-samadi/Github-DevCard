@@ -4,8 +4,13 @@ import ReposSection from "@/components/ui/trending/repos-section";
 import GenerateCard from "@/components/ui/generate-card";
 import { TOP_LANGUAGES } from "@/lib/constants";
 import { redirect } from "next/navigation";
-
 import type { GithubTrendingRepos, LanguageValue } from "@/lib/types";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "DevCard | Github Profile Viewer",
+  description: "DevCard | Github Profile Viewer by Alir3za Samadi",
+};
 
 export default async function TrendingPage({
   searchParams,
