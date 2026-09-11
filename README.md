@@ -9,7 +9,6 @@
 ![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)
 
 **🔗 Live demo:** [github-dev-card-bypl.vercel.app](https://github-dev-card-bypl.vercel.app/)
-> If the link doesn't load in your region, try opening it with a VPN enabled.
 
 ## Demo
 
