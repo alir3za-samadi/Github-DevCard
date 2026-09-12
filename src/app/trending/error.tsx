@@ -1,7 +1,7 @@
 "use client";
 
 import { startTransition } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/base/button";
 import { CloudAlert } from "lucide-react";
 import { useRouter } from "next/navigation";
 

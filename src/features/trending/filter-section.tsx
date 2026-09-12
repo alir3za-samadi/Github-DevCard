@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/base/button";
 import {
   Select,
   SelectContent,
@@ -9,12 +9,12 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/base/select";
 import { useRouter } from "next/navigation";
-import { TOP_LANGUAGES } from "@/lib/constants";
-
-import type { Language, Languages } from "@/lib/types";
 import Link from "next/link";
+import { TOP_LANGUAGES } from "@/lib/constants";
+import type { Language, Languages } from "@/lib/types";
+
 export default function SortSection({
   languages,
   currentLang,

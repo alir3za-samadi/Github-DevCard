@@ -1,14 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Field } from "@/components/ui/field";
+import { Input } from "@/components/base/input";
+import { Button } from "@/components/base/button";
+import { Field } from "@/components/base/field";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@/components/ui/tooltip";
+} from "@/components/base/tooltip";
 import { Swords } from "lucide-react";
 
 import { type SubmitEvent } from "react";

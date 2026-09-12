@@ -1,6 +1,6 @@
 import { getDaysAge } from "@/lib/utils";
 
-import type { Languages, LanguageValue } from "@/lib//types";
+import type { LanguagesValue } from "@/lib//types";
 
 export const GITHUB_API_BASE_URL = "https://api.github.com";
 
@@ -19,7 +19,7 @@ export const GITHUB_ENDPOINTS = {
   USER_LATEST_UPDATED_REPO: (username: string) =>
     `${GITHUB_API_BASE_URL}/search/repositories?q=user:${username}+fork:true&sort=updated&order=desc&per_page=1`,
 
-  TRENDING_REPOS: (language: LanguageValue, daysAgo: number) => {
+  TRENDING_REPOS: (language: LanguagesValue, daysAgo: number) => {
     const dateQuery = getDaysAge(daysAgo);
     const rawQuery = `language:${language} pushed:>${dateQuery}`;
     const encodedQuery = encodeURIComponent(rawQuery);
@@ -27,7 +27,13 @@ export const GITHUB_ENDPOINTS = {
   },
 } as const;
 
-export const TOP_LANGUAGES: Languages = [
+export const SORT_OPTIONS = [
+  { label: "Recently Updated", value: "updated" },
+  { label: "Most Stars", value: "stars" },
+  { label: "Name", value: "name" },
+] as const;
+
+export const TOP_LANGUAGES = [
   {
     label: "JavaScript",
     value: "javascript",
@@ -53,10 +59,4 @@ export const TOP_LANGUAGES: Languages = [
     value: "go",
     color: "bg-cyan-400/20 text-cyan-300 border-cyan-500/30",
   },
-] as const;
-
-export const SORT_OPTIONS = [
-  { label: "Recently Updated", value: "updated" },
-  { label: "Most Stars", value: "stars" },
-  { label: "Name", value: "name" },
 ] as const;

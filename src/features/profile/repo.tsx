@@ -1,10 +1,10 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/base/card";
 import { formatDate } from "@/lib/utils";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from "@/components/ui/hover-card";
+} from "@/components/base/hover-card";
 
 import type { GithubRepo } from "@/lib/types";
 import { ExternalLink } from "lucide-react";

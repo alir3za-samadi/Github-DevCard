@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, type SubmitEvent } from "react";
-import { Field } from "@/components/ui/field";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Field } from "@/components/base/field";
+import { Button } from "@/components/base/button";
+import { Input } from "@/components/base/input";
 import { useRouter } from "next/navigation";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@/components/ui/tooltip";
+} from "@/components/base/tooltip";
 import Link from "next/link";
 
 const PRESET_USERS = ["torvalds", "gaearon", "sindresorhus"] as const;

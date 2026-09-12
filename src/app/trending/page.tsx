@@ -1,9 +1,9 @@
 import PageHeader from "@/components/ui/page-header";
-import FilterSection from "@/components/ui/trending/filter-section";
-import ReposSection from "@/components/ui/trending/repos-section";
+import FilterSection from "@/features/trending/filter-section";
+import ReposSection from "@/features/trending/repos-section";
 import GenerateCard from "@/components/ui/generate-card";
+import { getTerndingRepos } from "@/lib/github";
 import { TOP_LANGUAGES } from "@/lib/constants";
-import type { GithubTrendingRepos, LanguageValue } from "@/lib/types";
 import type { Metadata } from "next";
 
 export async function generateMetadata({
@@ -73,34 +73,4 @@ export default async function TrendingPage({
       />
     </div>
   );
-}
-
-async function getTerndingRepos(
-  language: LanguageValue,
-  daysAge?: number,
-): Promise<GithubTrendingRepos | null> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-  try {
-    const res = await fetch(
-      `${baseUrl}/api/github/trending?lang=${language}&daysAge=${daysAge}`,
-      {
-        next: { revalidate: 3600 },
-      },
-    );
-
-    if (!res.ok) {
-      if (res.status === 404) return null;
-
-      const errorData = await res.json().catch(() => null);
-      const errorMessage = errorData?.message || "FAILED_TO_FETCH";
-
-      throw new Error(errorMessage);
-    }
-    const json = await res.json();
-
-    return json;
-  } catch (error) {
-    throw error;
-  }
 }

@@ -1,5 +1,4 @@
 import { SORT_OPTIONS, TOP_LANGUAGES } from "@/lib/constants";
-
 export interface UserProfileData {
   username: string;
   followers: number;
@@ -95,13 +94,17 @@ export type GithubTrendingReposResponse =
   | GithubTrendingRepos
   | { message: string };
 
-export type SortOptionValue = (typeof SORT_OPTIONS)[number]["value"];
+export interface SortOption {
+  label: string;
+  value: string;
+}
+export type SortOptions = SortOption[];
+export type SortOptionsValue = (typeof SORT_OPTIONS)[number]["value"];
 
 export interface Language {
   label: string;
   value: string;
   color: string;
 }
-
 export type Languages = readonly Language[];
-export type LanguageValue = (typeof TOP_LANGUAGES)[number]["value"];
+export type LanguagesValue = (typeof TOP_LANGUAGES)[number]["value"];

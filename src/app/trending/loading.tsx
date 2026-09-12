@@ -1,6 +1,6 @@
-import { Skeleton } from "@/components/ui/skeleton";
-import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/base/skeleton";
+import { Card } from "@/components/base/card";
+import { Separator } from "@/components/base/separator";
 
 export default function Loading() {
   return (

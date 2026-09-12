@@ -1,7 +1,7 @@
 import PageHeader from "@/components/ui/page-header";
-import RepoSection from "@/components/ui/profile/repos-section";
-import ProfileSection from "@/components/ui/profile/profile-section";
-import { Separator } from "@/components/ui/separator";
+import ReposSection from "@/features/profile/repos-section";
+import ProfileSection from "@/features/profile/profile-section";
+import { Separator } from "@/components/base/separator";
 import { notFound } from "next/navigation";
 import {
   fetchGithubUser,
@@ -63,7 +63,7 @@ export default async function UserProfile({
       />
 
       <Separator />
-      <RepoSection repos={repos} />
+      <ReposSection repos={repos} />
     </div>
   );
 }

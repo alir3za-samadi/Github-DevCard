@@ -1,15 +1,16 @@
 "use server";
 
 import { GITHUB_ENDPOINTS } from "@/lib/constants";
-
 import type {
   GithubReposResponse,
   GithubUserResponse,
   GithubStarredResponse,
   GithubTrendingReposResponse,
   GithubRepo,
-  LanguageValue,
+  LanguagesValue,
   TrendingRepo,
+  GithubTrendingRepos,
+  UserProfileData,
 } from "@/lib/types";
 
 const token = process.env.GITHUB_TOKEN;
@@ -111,7 +112,7 @@ export async function fetchGithubUserMostStarredRepo(
 }
 
 export async function fetchGithubTrendingRepos(
-  language: LanguageValue,
+  language: LanguagesValue,
   daysAge: number,
 ): Promise<GithubTrendingReposResponse> {
   try {
@@ -153,5 +154,58 @@ export async function fetchGithubTrendingRepos(
     return reposData;
   } catch {
     return { message: "NETWORK_ERROR" };
+  }
+}
+
+export async function getTerndingRepos(
+  language: LanguagesValue,
+  daysAge?: number,
+): Promise<GithubTrendingRepos | null> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+  try {
+    const res = await fetch(
+      `${baseUrl}/api/github/trending?lang=${language}&daysAge=${daysAge}`,
+      {
+        next: { revalidate: 3600 },
+      },
+    );
+
+    if (!res.ok) {
+      if (res.status === 404) return null;
+
+      const errorData = await res.json().catch(() => null);
+      const errorMessage = errorData?.message || "FAILED_TO_FETCH";
+
+      throw new Error(errorMessage);
+    }
+    const json = await res.json();
+
+    return json;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getUser(
+  username: string,
+): Promise<UserProfileData | null> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+  try {
+    const res = await fetch(`${baseUrl}/api/github/profile/${username}`, {
+      next: { revalidate: 3600 },
+    });
+
+    if (!res.ok) {
+      if (res.status === 404) return null;
+
+      const errorData = await res.json().catch(() => null);
+      throw new Error(errorData?.message || "FAILED_TO_FETCH");
+    }
+
+    return await res.json();
+  } catch (error) {
+    throw error;
   }
 }

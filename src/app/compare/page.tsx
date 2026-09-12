@@ -1,10 +1,11 @@
 import PageHeader from "@/components/ui/page-header";
-import CompareForm from "@/components/ui/compare/compare-form";
-import UserInfo from "@/components/ui/compare/user-info";
-import HeadToHead from "@/components/ui/compare/head-to-head";
+import CompareForm from "@/features/compare/compare-form";
+import UserInfo from "@/features/compare/user-info";
+import HeadToHead from "@/features/compare/head-to-head";
 import GenerateCard from "@/components/ui/generate-card";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/base/separator";
 import { Swords } from "lucide-react";
+import { getUser } from "@/lib/github";
 import type { UserProfileData } from "@/lib/types";
 import type { Metadata } from "next";
 
@@ -98,25 +99,4 @@ export default async function ComparePage({
       )}
     </div>
   );
-}
-
-async function getUser(username: string): Promise<UserProfileData | null> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-  try {
-    const res = await fetch(`${baseUrl}/api/github/profile/${username}`, {
-      next: { revalidate: 3600 },
-    });
-
-    if (!res.ok) {
-      if (res.status === 404) return null;
-
-      const errorData = await res.json().catch(() => null);
-      throw new Error(errorData?.message || "FAILED_TO_FETCH");
-    }
-
-    return await res.json();
-  } catch (error) {
-    throw error;
-  }
 }
